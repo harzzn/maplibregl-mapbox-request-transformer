@@ -78,12 +78,8 @@ function normalizeSpriteURL(url: string, accessToken: string) {
   const urlObject = parseUrl(url)
   const path = urlObject.path.split('.')
 
-  let path1 = path[0]
-  // If no extension provided in the URL, default to 'json'
-  const path2 = path[1] || 'json'
-  const suffix = path1.includes('@') ? path1.slice(path1.indexOf('@')) : ''
-  path1 = path1.split('@')[0]
-
-  urlObject.path = `/styles/v1${path1}/sprite${suffix}.${path2}`
+  // Remove any extension, let MapLibre append the correct one
+  const path1 = path[0].split('@')[0]
+  urlObject.path = `/styles/v1${path1}/sprite`
   return formatUrl(urlObject, accessToken)
 }

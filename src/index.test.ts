@@ -26,7 +26,7 @@ describe('transformMapboxUrl', () => {
     const input = 'mapbox://sprites/mapbox/streets-v12'
     const result = transformMapboxUrl(input, 'Sprite', TEST_ACCESS_TOKEN)
     expect(result?.url).toBe(
-      `https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite.json?access_token=${TEST_ACCESS_TOKEN}`
+      `https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite?access_token=${TEST_ACCESS_TOKEN}`
     )
   })
 
@@ -34,7 +34,7 @@ describe('transformMapboxUrl', () => {
     const input = 'mapbox://sprites/mapbox/streets-v12@2x'
     const result = transformMapboxUrl(input, 'Sprite', TEST_ACCESS_TOKEN)
     expect(result?.url).toBe(
-      `https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite@2x.json?access_token=${TEST_ACCESS_TOKEN}`
+      `https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite?access_token=${TEST_ACCESS_TOKEN}`
     )
   })
 
