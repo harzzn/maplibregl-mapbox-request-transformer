@@ -7,6 +7,16 @@ export function transformMapboxUrl(
   resourceType: string,
   accessToken: string
 ) {
+  // Validate access token
+  if (!accessToken) {
+    throw new Error('Access token is required')
+  }
+
+  // Ensure it's a mapbox URL
+  if (!isMapboxURL(url)) {
+    throw new Error('Invalid URL: URL must start with "mapbox://"')
+  }
+
   if (url.indexOf('/styles/') > -1 && url.indexOf('/sprite') === -1)
     return { url: normalizeStyleURL(url, accessToken) }
   if (url.indexOf('/sprites/') > -1)
@@ -17,6 +27,9 @@ export function transformMapboxUrl(
     return { url: normalizeSourceURL(url, accessToken) }
   if (resourceType === 'Source')
     return { url: normalizeSourceURL(url, accessToken) }
+
+  // If we get here, we couldn't match the URL to any known pattern
+  throw new Error('Invalid URL: Unrecognized Mapbox URL format')
 }
 
 function parseUrl(url: string) {
@@ -64,6 +77,13 @@ function normalizeSourceURL(url: string, accessToken: string) {
 function normalizeSpriteURL(url: string, accessToken: string) {
   const urlObject = parseUrl(url)
   const path = urlObject.path.split('.')
-  urlObject.path = `/styles/v1${path[0]}/sprite.${path[1]}`
+
+  let path1 = path[0]
+  // If no extension provided in the URL, default to 'json'
+  const path2 = path[1] || 'json'
+  const suffix = path1.includes('@') ? path1.slice(path1.indexOf('@')) : ''
+  path1 = path1.split('@')[0]
+
+  urlObject.path = `/styles/v1${path1}/sprite${suffix}.${path2}`
   return formatUrl(urlObject, accessToken)
 }
