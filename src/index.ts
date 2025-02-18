@@ -14,7 +14,7 @@ export function transformMapboxUrl(
 
   // Ensure it's a mapbox URL
   if (!isMapboxURL(url)) {
-    throw new Error('Invalid URL: URL must start with "mapbox://"')
+    throw new Error(`Invalid URL: URL must start with "mapbox://". URL: ${url}`)
   }
 
   if (url.indexOf('/styles/') > -1 && url.indexOf('/sprite') === -1)
@@ -29,14 +29,14 @@ export function transformMapboxUrl(
     return { url: normalizeSourceURL(url, accessToken) }
 
   // If we get here, we couldn't match the URL to any known pattern
-  throw new Error('Invalid URL: Unrecognized Mapbox URL format')
+  throw new Error(`Invalid URL: Unrecognized Mapbox URL format. URL: ${url}`)
 }
 
 function parseUrl(url: string) {
   const urlRe = /^(\w+):\/\/([^/?]*)(\/[^?]+)?\??(.+)?/
   const parts = url.match(urlRe)
   if (!parts) {
-    throw new Error('Unable to parse URL object')
+    throw new Error(`Unable to parse URL object. URL: ${url}`)
   }
   return {
     protocol: parts[1],

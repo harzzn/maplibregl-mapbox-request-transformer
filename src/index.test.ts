@@ -59,13 +59,17 @@ describe('error handling', () => {
   test('should throw for non-mapbox URLs', () => {
     expect(() =>
       transformMapboxUrl('https://example.com', 'Style', TEST_ACCESS_TOKEN)
-    ).toThrow('Invalid URL: URL must start with "mapbox://"')
+    ).toThrow(
+      'Invalid URL: URL must start with "mapbox://". URL: https://example.com'
+    )
   })
 
   test('should throw for malformed mapbox URLs', () => {
     expect(() =>
       transformMapboxUrl('mapbox:/malformed', 'Style', TEST_ACCESS_TOKEN)
-    ).toThrow('Invalid URL: Unrecognized Mapbox URL format')
+    ).toThrow(
+      'Invalid URL: Unrecognized Mapbox URL format. URL: mapbox:/malformed'
+    )
   })
 
   test('should throw for unrecognized URL pattern', () => {
@@ -75,7 +79,9 @@ describe('error handling', () => {
         'Style',
         TEST_ACCESS_TOKEN
       )
-    ).toThrow('Invalid URL: Unrecognized Mapbox URL format')
+    ).toThrow(
+      'Invalid URL: Unrecognized Mapbox URL format. URL: mapbox://unknown/pattern/test'
+    )
   })
 
   test('should throw for empty access token', () => {
