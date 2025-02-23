@@ -1,6 +1,9 @@
 {
-  "name": "maplibregl-mapbox-request-transformer",
+  "name": "@harzzn/maplibregl-mapbox-request-transformer",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Transform mapbox:// urls in MapboxGL Styles for use in MapLibreGL.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -23,7 +26,7 @@
   "files": ["dist", "src"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/harzzn/maplibregl-mapbox-request-transformer"
+    "url": "git+https://github.com/harzzn/maplibregl-mapbox-request-transformer.git"
   },
   "keywords": [
     "mapbox",
