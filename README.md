@@ -11,7 +11,7 @@ npm install maplibregl-mapbox-request-transformer --save
 
 ## Usage
 ````
-import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
+import { isMapboxURL, transformMapboxUrl } from '@harzzn/maplibregl-mapbox-request-transformer'
 
 const mapboxKey = 'pk.123'
 
